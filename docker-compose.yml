@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+    site:
+        build: .
+        restart: always
+        ports:
+            - 4999:4999
+        command: python run.py

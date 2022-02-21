@@ -3,115 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon" >
-    <title>Разумны кошык</title>
+    <title>A1 English</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
-
-    <script src="http://code.jquery.com/jquery-1.9.1.js">
-    </script>
-
-    <script>
-
-        function give_elem(id){
-            elem=
-                `<div class="input-group mb-3 row control-group">
-                    <div class="col">
-                        <select class="form-select" name="category" id="control-group${id}">
-                            <option selected>Выберите продукт</option>
-                        {% for item in product_category %}
-                            <option value= {{item}}>{{product_category[item]}}</option>
-                        {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col">
-                        <input type="button" class="btn btn-primary col-lg-12" value="Удалить продукт" id="removeButton">
-                    </div>
-                </div>`
-            return elem
-        };
-
-        $(document).ready(function () {
-            $("#addButton").click(function () {
-                const id = ($('.control-group').length + 1).toString();
-                $('.control-table').append(give_elem(id));
-            });
-        });
-
-        $(document).on("click", "#removeButton", function(){
-            if ($('.control-group').length === 1) {
-                alert("Как минимум один продукт должен быть выбран");
-                return false;
-            }
-            $(this).parent().parent().remove();
-        });
-
-    </script>
 </head>
 <body>
-    <form action="" method="POST">    
-        <div class="container justify-content-around">
-            <div class="input-group mb-3 row">
-                <div class="input-group-prepend col">
-                    <h4><span class="badge bg-primary col-lg-12">Выберите продукты</span></h4>
-                </div>
-            </div>
 
-            <div class="input-group mb-3 row">
-                <div class="input-group-prepend col" >
-                    <span class="input-group-text" id="basic-addon1">Ваш адрес:</span>
-                </div>
+<div class="container col-6 justify-content-center">
+    
+<div class="container d-flex justify-content-center .m-5">
+  <img src="/player" class="img-rounded"  width="200" height="200"> 
+</div>
 
-                <div class="col">
-                    <div>
-                        <input type="text" class="form-control" name = "address">
-                    </div>
-                </div>
-            </div>
+<div class="container">
+  <div id="full-progress" class="row">
+    <div class="progress col-md-9">
+      <div class="progress-bar" id="progressbar" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div> 
 
-            <div class="input-group mb-3 row">
-                <div class="input-group-prepend col">
-                    <span class="input-group-text" id="basic-addon2 ">Сумма:</span>
-                </div>
+    <div class="col-md-3 d-flex">
+      <div id="counter">0</div>/10
+    </div>
+  </div>
+</div>
 
-                <div class="col">
-                    <div>
-                        <input type="text" class="form-control" name = "money">
-                    </div>
-                </div>
-            </div>
-        </div>
+<br>
+<br>
 
-        <div class="container justify-content-around control-table">
-            <div class="input-group mb-3 row control-group">
-                <div class="col">
-                    <select class="form-select"  name="category" id="control-group1">
-                        <option selected>Выберите продукт</option>
-                        {% for item in product_category %}
-                            <option value= {{item}}>{{product_category[item]}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+<div class="container d-flex justify-content-center h1 text-primary">
+  Що чуешь? 
+  <br>
+  Обери правильний вариант
+</div>
 
-                <div class="col">
-                    <input type='button' class="btn btn-primary col-lg-12" value='Удалить продукт' id='removeButton'>
-                </div>
-            </div>
-        </div>
+<br>
+<br>
 
-        <div class="container justify-content-around">
-            <div class="input-group mb-3 row">
-                <div class="col">
-                    <input type='button' class="btn btn-primary col-lg-12" value="Добавить позицию" id='addButton'>
-                </div>
+<div class="container" id="answersVariants">
+  <div class="row">
+    <div class="col d-flex justify-content-center border border-primary rounded-3 border-3 m-3 p-5 h2" id="button0" onclick="check_answer(this)"></div>
 
-                <div class="col">
-                    <input type="submit" class="btn btn-primary col-lg-12" value="Расчитать" id="submit">
-                </div>
-            </div>
-        </div>
-    </form>   
+    <div class="col d-flex justify-content-center border border-primary rounded-3 border-3 m-3 p-5 h2" id="button1" onclick="check_answer(this)"></div>
+
+    <div class="w-100"></div>
+
+    <div class="col d-flex justify-content-center border border-primary rounded-3 border-3 m-3 p-5 h2" id="button2" onclick="check_answer(this)"></div>
+
+    <div class="col d-flex justify-content-center border border-primary rounded-3 border-3 m-3 p-5 h2" id="button3" onclick="check_answer(this)"></div>
+
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container d-flex justify-content-center border border-primary rounded-3 border-3 p-3 h2" onclick="scipAnswer()">Пропустити</div>
+
+</div>
+
+
 </body>
+
+<script type="text/javascript">
+
+  var right_answers = ["book", "boy", "car"];
+  var words =  {"book":["book","work","car","apple"],   
+                "boy": ["house", "boy", "book", "work"],
+                "car": ["car", "apple", "house", "boy"],
+                "bear": ["arm", "bear", "home", "phone"],
+                "door": ["bicycle", "color", "ornage", "cook"]};
+
+  var counter = 0
+
+  var answer = right_answers[counter]
+  for (var i = 0; i < 4; i++) {
+    var variant = words[answer][i]
+    document.getElementById('button'+i).innerHTML = words[answer][i];
+    
+    if (variant == answer){
+      console.log(variant, answer)
+      document.getElementById('button'+i).classList.add("right_answer");
+    }
+  };
+
+
+function soundClick() {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = 'work.m4a'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+}
+
+
+  function incrementValue(){
+      counter ++
+      var keyword = right_answers[counter]
+      document.getElementById('button0').innerHTML = words[keyword][0];
+      document.getElementById('button1').innerHTML = words[keyword][1];
+      document.getElementById('button2').innerHTML = words[keyword][2];
+      document.getElementById('button3').innerHTML = words[keyword][3];
+      document.getElementById('counter').innerHTML = counter;
+    };
+
+
+
+  function scipAnswer(){
+    incrementValue()
+      var right_answer = right_answers[counter]
+      var variantsAnswers = document.getElementById("answersVariants")
+      var originalContent = variantsAnswers.innerHTML
+      var rightAnswer = `
+                        <div>
+                          <div class="container d-flex justify-content-center h3 text-success">
+                            ! ПРАВIЛЬНИЙ ВАРИАНТ !
+                          </div>
+                          <div class="col d-flex justify-content-center border border-success rounded-3 border-3 m-3 p-3 h3">
+                            `+right_answer+`
+                          </div>`
+
+ variantsAnswers.innerHTML = rightAnswer
+    setTimeout(function() {
+      variantsAnswers.innerHTML = originalContent
+    }, 3000);
+}
+
+
+  function check_answer(element){
+    var answer = element.innerHTML
+    var button_with_right_answer = document.getElementsByClassName("right_answer")[0];
+    var right_answer = right_answers[counter]
+    var progressbar = document.getElementById('progressbar')
+
+    var current_width = progressbar.style.width.replace("%", " ");
+    var new_width_value = parseInt(current_width)+10
+    var new_width = new_width_value.toString()+"%";
+    progressbar.style.width=new_width
+
+
+    if (answer == right_answer){
+      element.classList.add("btn-success");
+      setTimeout(function(){
+      incrementValue();
+      }, 2000);
+      setTimeout(function(){
+        element.classList.remove("btn-success");
+      }, 2000);
+
+    }
+    else {
+      button_with_right_answer.classList.add("btn-success");
+      element.classList.add("btn-danger");
+
+      setTimeout(function(){
+      incrementValue();
+      }, 2000);
+
+      setTimeout(function(){
+        element.classList.remove("btn-danger");
+        button_with_right_answer.classList.remove("btn-success");
+
+      }, 2000);
+
+      setTimeout(function(){
+      var variantsAnswers = document.getElementById("answersVariants")
+      var originalContent = variantsAnswers.innerHTML
+      var rightAnswer = `
+                        <div>
+                          <div class="container d-flex justify-content-center h3 text-success">
+                            ! ПРАВIЛЬНИЙ ВАРИАНТ !
+                          </div>
+                          <div class="col d-flex justify-content-center border border-success rounded-3 border-3 m-3 p-3 h3">
+                            `+right_answer+`
+                          </div>
+                          
+                        
+                          <div class="container d-flex justify-content-center h3 text-danger">
+                          ! ТИ ВИДПОВИВ !
+                          </div>
+                          <div class="col d-flex justify-content-center border border-danger rounded-3 border-3 m-3 p-3 h3"> 
+                            <br>
+                            `+answer+`
+                          </div>
+                        
+                        </div>`
+
+ variantsAnswers.innerHTML = rightAnswer
+    setTimeout(function() {
+      variantsAnswers.innerHTML = originalContent
+    }, 3000);
+
+  }, 2000);
+
+  }
+}
+
+// проигрыш звукового
+// учесть, что не дальше длинны словаря
+// https://docs.google.com/spreadsheets/d/1efncDJgOdRRM997rS9qcAFhXgDA_jKyMIPYKlCRW2PI/edit#gid=0
+
+</script>
 </html>
